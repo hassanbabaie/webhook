@@ -146,7 +146,8 @@ func CheckScalrSignature(headers map[string]interface{}, body []byte, signingKey
  	expectedSignature := hex.EncodeToString(mac.Sum(nil))
  
  	if !hmac.Equal([]byte(providedSignature), []byte(expectedSignature)) {
- 		return false, &SignatureError{providedSignature}
+ 		return false, fmt.Errorf("invalid Scalr Signature passed to webhook '%s'", {providedSignature})
+		// return false, &SignatureError{providedSignature}
  	}
 
 	if !checkDate {
